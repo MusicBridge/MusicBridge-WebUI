@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MusicBridge Default WebUI</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Roboto", sans-serif;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+
+        .root {
+            min-width: 100%;
+            height: 100vh;
+            position: relative;
+
+            display: grid;
+            grid-template-columns: 3.5fr 1fr;
+            grid-template-rows: 0.6fr 8fr 1fr;
+
+            background-color: #121212;
+        }
+
+        header {
+            grid-column-start: 1;
+            grid-column-end: 3;
+
+            background-color: #202020;
+        }
+
+        main {
+            grid-column: 1;
+            grid-row: 2;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .data {
+            grid-column: 2;
+            grid-row: 2;
+
+            border-radius: 10px;
+            margin: 10px;
+
+
+        }
+
+        .data .track-header {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .track-logo {
+            margin: 10px 0 0 20px;
+            border-radius: 10px;
+            width: 85px;
+            height: 85px;
+        }
+
+        .data .track-header .text h1 {
+            margin: 0 20px 0 10px;
+            font-family: "Roboto", sans-serif;
+            font-size: 56px;
+            color: white;
+            max-width: 195px;
+        }
+
+        .data .track-header .text h3 {
+            margin: 5px 20px 20px 10px;
+            font-family: "Roboto", sans-serif;
+            font-size: 20px;
+            color: #8b8b8b;
+            max-width: 195px;
+        }
+
+        footer {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            grid-row: 3;
+
+            border-radius: 10px;
+            margin: 0 10px 10px;
+
+            background-color: #202020;
+        }
+
+        .track-buttons {
+            margin: 10px 10px 10px auto;
+        }
+
+        .track-button {
+            height: 20px;
+            width: 20px;
+            padding: 5px;
+            box-sizing: content-box;
+        }
+
+        .track-info {
+            margin-left: 15px;
+            margin-top: -20px;
+            display: flex;
+        }
+
+        .track-info img {
+            margin-left: 5px;
+            width: 25px;
+            height: 25px;
+            opacity: 0.7;
+        }
+
+        .button {
+            border-radius: 10px;
+            background-color: #303030;
+        }
+
+        .button:hover {
+            background-color: #535353;
+        }
+
+        header {
+            display: grid;
+            grid-template-columns: 1fr 3fr 2fr 0.25fr;
+            grid-template-rows: 1fr;
+        }
+
+
+        header form {
+            grid-column: 2;
+            width: 100%;
+        }
+
+        .search {
+            margin: 7px;
+            border-radius: 15px;
+            background-color: #3e3e3e;
+            border: 0;
+            font-size: 1.25rem;
+            width: 96%;
+            color: #ffffff;
+            padding: 10px;
+        }
+
+        .accounts {
+            margin-left: 12px;
+            display: flex;
+            align-items: center;
+            list-style-type: none;
+            overflow: hidden;
+        }
+
+        .accounts li {
+            float: left;
+        }
+
+        .accounts li a {
+            display: block;
+        }
+
+        .account {
+            width: 36px;
+            height: 36px;
+            border: 2px solid #FFF;
+            border-radius: 50%;
+            padding: 4px;
+            margin-right: 10px;
+        }
+
+        .account:hover {
+            padding: 5px;
+        }
+
+        .account img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+
+        .account-inactive img {
+            filter: grayscale(100%);
+        }
+
+        .account-inactive {
+            border: 3px solid #aaaaaa;
+        }
+
+        .account-inactive:hover {
+            border: 3px solid #c5c5c5;
+        }
+
+        .account-active {
+            border: 3px solid #78d32d;
+        }
+
+        .account-active:hover {
+            border: 3px solid #8af334;
+        }
+
+        .account-premium {
+            border: 3px solid #e4c317;
+        }
+
+        .account-premium:hover {
+            border: 3px solid #fad518;
+        }
+
+        .settings-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings {
+            display: flex;
+            width: 3vw;
+            height: 75%;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings img {
+            width: 32px;
+            height: 32px;
+        }
+
+        footer {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
+            grid-template-rows: 0.8fr 1fr;
+            grid-template-areas:
+                "current-track-logo-container playslider-container playslider-container playslider-container current-track-volume"
+                "current-track-logo-container . current-track-buttons . current-track-info";
+
+        }
+
+        .current-track-logo-container {
+            grid-area: current-track-logo-container;
+            display: flex;
+            align-items: center;
+            margin-left: 10px;
+        }
+
+        .current-track-logo {
+            border-radius: 10px;
+            width: 65px;
+            height: 65px;
+        }
+
+        .current-track-logo-container .text {
+            margin-left: 10px;
+            color: white;
+        }
+
+        .current-track-logo-container .text h1 {
+            margin-bottom: 4px;
+        }
+
+        .current-track-logo-container .text h3 {
+            color: #8b8b8b;
+        }
+
+        .current-track-buttons {
+            grid-area: current-track-buttons;
+        }
+
+        .current-track-volume {
+            grid-area: current-track-volume;
+        }
+
+        .playslider-container {
+            grid-area: playslider-container;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .playslider-container p {
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        .playslider-container input {
+            margin-left: 15px;
+            margin-right: 15px;
+            width: 80%;
+            accent-color: white;
+        }
+
+        .current-track-buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .current-track-buttons img {
+            width: 38px;
+            height: 38px;
+        }
+
+        .current-track-buttons a {
+            width: 38px;
+            height: 38px;
+        }
+
+        .current-track-buttons img:hover {
+            opacity: 0.7;
+        }
+
+        .current-track-volume {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .current-track-volume img {
+            width: 38px;
+            height: 38px;
+        }
+
+        .current-track-volume input {
+            width: 80%;
+            accent-color: white;
+            margin: 10px;
+        }
+
+        .current-track-volume p {
+            color: white;
+            font-size: 1.25rem;
+            margin-right: 10px;
+        }
+
+        .current-track-info {
+            grid-area: current-track-info;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .current-track-info img {
+            margin-left: 20px;
+            width: 25px;
+            height: 25px;
+            opacity: 0.7;
+        }
+
+        .lyrics-container {
+            margin-top: 10px;
+        }
+
+        .lyrics-container-header {
+            display: flex;
+            align-items: center;
+        }
+
+        .lyrics-container-header h2 {
+            color: #ffffff;
+            margin-left: 20px;
+        }
+
+        .lyrics-types {
+            margin-left: auto;
+            margin-right: 10px;
+            background-color: #4c4c4c;
+            padding: 5px;
+            border-radius: 10px;
+        }
+
+        .lyrics-type {
+            display: inline-block;
+        }
+
+        .lyrics-type input[type=radio] {
+            display: none;
+        }
+
+        .lyrics-type label {
+            display: inline-block;
+            cursor: pointer;
+            padding: 0 15px;
+            line-height: 34px;
+            border-radius: 6px;
+            user-select: none;
+            color: #ffffff;
+        }
+
+        .lyrics-type input[type=radio]:not(checked) + label {
+            background: #222222;
+        }
+
+        .lyrics-type input[type=radio]:checked + label {
+            background: #818181;
+        }
+
+        .lyrics-type label:hover {
+            color: #9f9f9f;
+        }
+
+        .lyrics-type input[type=radio]:disabled + label {
+            background: #121212;
+            color: #333333;
+        }
+
+        .search-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .search-list li {
+            margin: 10px;
+            border-radius: 10px;
+            height: 60px;
+            display: flex;
+        }
+
+        .search-track-data {
+            display: flex;
+        }
+
+        .search-track-data img {
+            margin: 5px;
+            border-radius: 10px;
+        }
+
+        .search-track-data h1 {
+            color: white;
+        }
+
+        .search-track-data h3 {
+            color: #8b8b8b;
+        }
+
+        .search-track-info {
+            margin-left: auto;
+            align-items: center;
+            display: flex;
+            margin-right: 5px;
+        }
+
+        .search-track-info img {
+            margin-left: 5px;
+            width: 25px;
+            height: 25px;
+            opacity: 0.7;
+        }
+
+        .data .track-header .text {
+            max-height: 128px;
+            overflow: hidden;
+        }
+
+    </style>
+</head>
+<body>
+<div class="root" id="root">
+    <header>
+        <form id="search-form">
+            <label for="search"></label><input type="text" id="search" class="search" placeholder="Search"/>
+        </form>
+        <ul class="accounts">
+            <li>
+                <a class="account account-inactive" href="#"><img
+                        src="https://developer.valvesoftware.com/w/images/8/8b/Debugempty.png" alt=""
+                        title="PLACEHOLDER"></a>
+            </li>
+            <li>
+                <a class="account account-active" href="#"><img
+                        src="https://developer.valvesoftware.com/w/images/8/8b/Debugempty.png" alt=""
+                        title="PLACEHOLDER"></a>
+            </li>
+            <li>
+                <a class="account account-premium" href="#"><img
+                        src="https://developer.valvesoftware.com/w/images/8/8b/Debugempty.png" alt=""
+                        title="PLACEHOLDER"></a>
+            </li>
+        </ul>
+        <div class="settings-button">
+            <a class="settings button" href="#"><img src="icons/settings.svg" alt=""></a>
+        </div>
+    </header>
+    <main>
+        <ul class="search-list" id="search-list">
+
+        </ul>
+    </main>
+    <div class="data" id="data"
+         style="background: linear-gradient(180deg, rgb(32, 32, 32) 80%, rgba(184, 211, 108, 0.5) 100%);">
+        <div class="track-header">
+            <img class="track-logo" id="track-data-logo"
+                 src="https://developer.valvesoftware.com/w/images/8/8b/Debugempty.png" alt="none">
+            <div class="text">
+                <h1 id="track-data-title">Title</h1>
+                <h3 id="track-data-artist-album">Artist (Album)</h3>
+            </div>
+            <div></div>
+            <div class="track-buttons">
+                <div>
+                    <a href="javascript:void(0)" id="download-track-button"><img
+                            class="track-button button" src="icons/download.svg" alt="DWNL" title="Download track"></a>
+                    <a target="_blank" rel="noopener noreferrer" href="#" id="open-track-button"><img
+                            class="track-button button" src="icons/open-link.svg" alt="OPEN"
+                            title="Open track in service"></a>
+                </div>
+                <div>
+                    <a id="search-artist-button"><img
+                            class="track-button button" src="icons/artist-search.svg" alt="FIND"
+                            title="Find all from artist"></a>
+                    <a target="_blank" rel="noopener noreferrer" href="#" id="open-artist-button"><img
+                            class="track-button button" src="icons/open-link.svg" alt="OPEN"
+                            title="Open artist in service"></a>
+                </div>
+                <div>
+                    <a id="search-album-button"><img
+                            class="track-button button" src="icons/music-album.svg" alt="FIND"
+                            title="Find all from album"></a>
+                    <a target="_blank" rel="noopener noreferrer" href="#" id="open-album-button"><img
+                            class="track-button button" src="icons/open-link.svg" alt="OPEN"
+                            title="Open album in service"></a>
+                </div>
+            </div>
+        </div>
+        <div class="track-info" id="track-data-info">
+            <img src="icons/age-restricted.svg" alt="">
+            <img src="icons/lyrics-text.svg" alt="">
+            <img src="icons/lyrics-lrc.svg" alt="">
+        </div>
+        <div class="lyrics-container">
+            <div class="lyrics-container-header">
+                <h2>Lyrics</h2>
+                <div class="lyrics-types">
+                    <div class="lyrics-type">
+                        <input id="lyrics-lrc" type="radio" name="lyrics" value="1" disabled>
+                        <label for="lyrics-lrc">LRC</label>
+                    </div>
+                    <div class="lyrics-type">
+                        <input id="lyrics-text" type="radio" name="lyrics" value="2" checked>
+                        <label for="lyrics-text">Text</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <div class="current-track-logo-container">
+            <img class="current-track-logo" id="current-track-logo"
+                 src="https://developer.valvesoftware.com/w/images/8/8b/Debugempty.png" alt="none">
+            <div class="text">
+                <h1 id="current-track-title">Title</h1>
+                <h3 id="current-track-artist-album">Artist (Album)</h3>
+            </div>
+        </div>
+        <div></div>
+        <div class="playslider-container">
+            <p>99:00</p>
+            <input type="range" id="playback" name="playback" min="0" max="360"/>
+            <p>99:00</p>
+        </div>
+        <div class="current-track-buttons">
+            <a class="current-track-button" href="#"><img src="icons/backward.svg" alt=""></a>
+            <a class="current-track-button playbutton" href="#"><img src="icons/play.svg" alt=""></a>
+            <a class="current-track-button" href="#"><img src="icons/forward.svg" alt=""></a>
+        </div>
+        <div></div>
+        <div class="current-track-volume">
+            <img src="icons/volume-min.svg" alt="">
+            <input type="range" id="volume" name="volume" min="0" max="100"/>
+            <p>NaN%</p>
+        </div>
+        <div class="current-track-info">
+            <img src="icons/age-restricted.svg" alt="" title="Age restricted">
+            <img src="icons/lyrics-text.svg" alt="" title="Text lyrics available">
+            <img src="icons/lyrics-lrc.svg" alt="" title="LRC lyrics available">
+        </div>
+    </footer>
+</div>
+</body>
+<script>
+    const TrackInfoIconAgeRestrictedPattern = '<img src="icons/age-restricted.svg" alt="" title="Age restricted">';
+    const TrackInfoIconLyricsTextPattern = '<img src="icons/lyrics-text.svg" alt="" title="Text lyrics available">';
+    const TrackInfoIconLyricsLRCPattern = '<img src="icons/lyrics-lrc.svg" alt="" title="LRC lyrics available">';
+
+    const searchTrackObjectPattern = `
+        <li onclick="openTrackData('%ProviderId%', '%TrackId%')"
+            style="background: linear-gradient(90deg, rgb(50, 50, 50) 25%, rgba(%ServiceColorR%, %ServiceColorG%, %ServiceColorB%, 0.5) 50%, rgb(50, 50, 50) 75%);"
+            onmouseover="this.style.background='linear-gradient(90deg, rgb(40, 40, 40) 20%, rgba(%ServiceColorR%, %ServiceColorG%, %ServiceColorB%, 0.8) 50%, rgb(40, 40, 40) 80%)'; this.style.cursor = 'pointer';"
+            onmouseout="this.style.background='linear-gradient(90deg, rgb(50, 50, 50) 25%, rgba(%ServiceColorR%, %ServiceColorG%, %ServiceColorB%, 0.5) 50%, rgb(50, 50, 50) 75%)'; this.style.cursor = 'default';">
+            <div class="search-track-data" >
+                <img src="%Logo%" alt="none"
+                onmouseover="this.style.opacity = 0.4"
+                onmouseout="this.style.opacity = 1.0">
+                <img src="icons/play.svg" 
+                 onclick="playTrack('%ProviderId%', '%TrackId%')"
+                 style="margin-left: -55px; scale: 1; opacity: 0;"
+                 onmouseover="this.style.opacity = 1.0; this.parentElement.childNodes[1].style.opacity = 0.4;"
+                 onmouseout="this.style.opacity = 0.0; this.parentElement.childNodes[1].style.opacity = 1.0;"
+                >
+                <div class="text">
+                    <h1>%Title%</h1>
+                    <h3>%Artist% (%Album%)</h3>
+                </div>
+            </div>
+            <div class="search-track-info">
+                %TrackInfo%
+            </div>
+        </li>
+    `;
+
+    const TOKEN = "But nobody came..."
+
+    const placeholderImageURL = "https://developer.valvesoftware.com/w/images/8/8b/Debugempty.png";
+
+    const searchTrackList = document.getElementById("search-list");
+
+    let currentTrackId = "";
+    let currentProviderId = "";
+
+    const currentTrackLogoObject = document.getElementById('current-track-logo');
+    const currentTrackTitleObject = document.getElementById('current-track-title');
+    const currentTrackArtistAlbumObject = document.getElementById('current-track-artist-album');
+
+    const defaultProviders = {
+        "yandex": "http://localhost:8096"
+    }
+
+    function makeTrackInfoIcons(isAgeRestricted, haveLyricsText, haveLyricsLRC) {
+        let icons = "";
+
+        icons += isAgeRestricted ? TrackInfoIconAgeRestrictedPattern : "";
+        icons += haveLyricsText ? TrackInfoIconLyricsTextPattern : "";
+        icons += haveLyricsLRC ? TrackInfoIconLyricsLRCPattern : "";
+
+        return icons;
+    }
+
+    function makeSearchTrackObject(ServiceColorR, ServiceColorG, ServiceColorB, providerId, trackId, LogoURL, Title, Artist, Album, isAgeRestricted, haveLyricsText, haveLyricsLRC) {
+        return searchTrackObjectPattern
+            .replaceAll("%ServiceColorR%", ServiceColorR).replaceAll("%ServiceColorG%", ServiceColorG).replaceAll("%ServiceColorB%", ServiceColorB)
+            .replaceAll("%ProviderId%", providerId).replaceAll("%TrackId%", trackId).replaceAll("%Logo%", LogoURL).replaceAll("%Title%", Title).replaceAll("%Artist%", Artist).replaceAll("%Album%", Album)
+            .replaceAll("%TrackInfo%", makeTrackInfoIcons(isAgeRestricted, haveLyricsText, haveLyricsLRC));
+    }
+
+    function addSearchTrack(ServiceColorR, ServiceColorG, ServiceColorB, providerId, trackId, LogoURL, Title, Artist, Album, isAgeRestricted, haveLyricsText, haveLyricsLRC) {
+        searchTrackList.innerHTML += makeSearchTrackObject(ServiceColorR, ServiceColorG, ServiceColorB, providerId, trackId, LogoURL, Title, Artist, Album, isAgeRestricted, haveLyricsText, haveLyricsLRC);
+    }
+
+    function clearSearchList() {
+        searchTrackList.innerHTML = "";
+    }
+
+    async function search(text) {
+        clearSearchList();
+
+        for (const [key, value] of Object.entries(defaultProviders)) {
+
+            await fetch(value + '/v1.0/search/' + text, {
+                method: 'GET',
+                headers: {
+                    "Authorization": TOKEN
+                }
+            })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(async data => {
+                    let providerInfo = {};
+
+                    await fetch(value).then(response => {
+                        return response.json();
+                    }).then(data => {
+                        providerInfo = data;
+                    })
+                    for (let j = 0; j < data.length; j++) {
+                        addSearchTrack(providerInfo.color.r, providerInfo.color.g, providerInfo.color.b, providerInfo["provider_identifier"],
+                            data[j].id, data[j].album.logo, data[j].title, data[j].artist.name, data[j].album.name,
+                            data[j].explicit, data[j].lyrics.text, data[j].lyrics.lrc
+                        )
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                });
+
+        }
+
+    }
+
+    function fitDataText(elements, minSize = 12, gap = 4) {
+        const elems = Array.from(elements);
+        const container = elems[0].parentElement;
+
+        const baseSizes = elems.map(el => el.tagName === "H1" ? 56 : 20);
+        elems.forEach((el, i) => el.style.fontSize = baseSizes[i] + "px");
+        let totalHeight = elems.reduce((sum, el) => sum + el.scrollHeight, 0) + gap * (elems.length - 1);
+        const scale = Math.min(1, container.clientHeight / totalHeight);
+
+        elems.forEach((el, i) => {
+            let newSize = Math.max(minSize, Math.floor(baseSizes[i] * scale));
+            el.style.fontSize = newSize + "px";
+        });
+    }
+
+    function displayData(providerId, trackId) {
+        let providerInfo = {};
+
+        fetch(defaultProviders[providerId]).then(response => {
+            return response.json();
+        }).then(data => {
+            providerInfo = data;
+        })
+
+        fetch(defaultProviders[providerId] + '/v1.0/search/trackId:' + trackId, {
+            method: 'GET',
+            headers: {
+                "Authorization": TOKEN
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                const foundedTrack = data[0];
+                console.log(foundedTrack)
+
+                document.getElementById("track-data-title").innerText = foundedTrack.title;
+                document.getElementById("track-data-artist-album").innerText = `${foundedTrack.artist.name} (${foundedTrack.album.name})`;
+                fitDataText(document.querySelectorAll(".data .text h1, .data .text h3"))
+                document.getElementById("track-data-logo").src = foundedTrack.album.logo;
+                document.getElementById("track-data-info").innerHTML = makeTrackInfoIcons(foundedTrack.explicit, foundedTrack.lyrics.text, foundedTrack.lyrics.lrc);
+                document.getElementById("data").style.background = "linear-gradient(180deg, rgb(32, 32, 32) 80%, rgba(%R%, %G%, %B%, 0.5) 100%)"
+                    .replaceAll("%R%", providerInfo.color.r).replaceAll("%G%", providerInfo.color.g).replaceAll("%B%", providerInfo.color.b)
+
+                document.getElementById("open-track-button").href = foundedTrack.url;
+                document.getElementById("open-artist-button").href = foundedTrack.artist.url;
+                document.getElementById("open-album-button").href = foundedTrack.album.url;
+
+                document.getElementById("download-track-button").onclick = function (e) {
+                    downloadTrack(defaultProviders[providerId] + '/v1.0/download/' + foundedTrack.id, foundedTrack.artist.name + ' - ' + foundedTrack.title + '.mp3')
+                };
+
+                document.getElementById("search-artist-button").onclick = async function (e) {
+                    document.getElementById("search").value = `artistId:${foundedTrack.artist.id}`;
+                    clearSearchList();
+                    await search(`artistId:${foundedTrack.artist.id}`)
+                };
+                document.getElementById("search-album-button").onclick = async function (e) {
+                    document.getElementById("search").value = `albumId:${foundedTrack.album.id}`;
+                    clearSearchList();
+                    await search(`albumId:${foundedTrack.album.id}`)
+                };
+            })
+            .catch(error => {
+                console.error('Fetch error:', error);
+            });
+    }
+
+    async function downloadTrack(url, fileName) {
+        const response = await fetch(url, {
+            method: 'GET',
+            headers: {
+                'Authorization': TOKEN
+            }
+        });
+
+        if (response.ok) {
+            const blob = await response.blob();
+            const downloadUrl = window.URL.createObjectURL(blob);
+            const link = document.createElement('a');
+
+            link.href = downloadUrl;
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+
+            document.body.removeChild(link);
+            window.URL.revokeObjectURL(downloadUrl);
+        } else {
+            console.error('Download failed:', response.statusText);
+        }
+    }
+
+    function openTrackData(providerId, trackId) {
+        displayData(providerId, trackId);
+    }
+
+    function playTrack(providerId, trackId) {
+        console.log(`Play ${providerId}:${trackId}`);
+
+        currentProviderId = providerId;
+        currentTrackId = trackId;
+
+        fetch(defaultProviders[providerId] + '/v1.0/search/trackId:' + trackId, {
+            method: 'GET',
+            headers: {
+                "Authorization": TOKEN
+            }
+        }).then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+        }).then(data => {
+            const foundedTrack = data[0];
+
+            currentTrackLogoObject.src = foundedTrack.album.logo;
+            currentTrackTitleObject.innerText = foundedTrack.title;
+            currentTrackArtistAlbumObject.innerText = foundedTrack.artist.name + "(" + foundedTrack.album.name + ")";
+
+            fitDataText(document.querySelectorAll("footer .current-track-logo-container .text h1, footer .current-track-logo-container .text h3"), 12, 225)
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        addSearchTrack(184, 211, 108, "dummy", "0", placeholderImageURL, "Test", "Service", "Track", true, true, true);
+        document.getElementById("search-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const query = document.getElementById("search").value;
+            if (!query) return;
+
+            await search(query);
+        })
+    })
+</script>
+</html>
