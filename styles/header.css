@@ -1,0 +1,91 @@
+header {
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+    display: grid;
+    grid-template-columns: 1fr 3fr 2fr 0.25fr;
+    grid-template-rows: 1fr;
+
+    background-color: var(--fg-color);
+}
+
+
+header form {
+    grid-column: 2;
+    width: 100%;
+}
+
+
+.search {
+    margin: 7px;
+    border-radius: 15px;
+    background-color: var(--element-color);
+    border: 0;
+    font-size: 1.25rem;
+    width: 96%;
+    color: var(--title-color);
+    padding: 10px;
+}
+
+.accounts {
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.accounts li {
+    float: left;
+}
+
+.accounts li a {
+    display: block;
+}
+
+.account {
+    width: 36px;
+    height: 36px;
+    border: 2px solid var(--element-active-color);
+    border-radius: 50%;
+    padding: 4px;
+    margin-right: 10px;
+}
+
+.account:hover {
+    padding: 5px;
+}
+
+.account img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+}
+
+.account-inactive img {
+    filter: grayscale(100%);
+}
+
+.account-inactive {
+    border: 3px solid var(--account-inactive-color);;
+}
+
+.account-inactive:hover {
+    border: 3px solid var(--account-inactive-hover-color);
+}
+
+.account-active {
+    border: 3px solid var(--account-active-color);;
+}
+
+.account-active:hover {
+    border: 3px solid var(--account-active-hover-color);
+}
+
+.account-premium {
+    border: 3px solid var(--account-premium-color);
+}
+
+.account-premium:hover {
+    border: 3px solid var(--account-premium-hover-color);
+}

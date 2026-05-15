@@ -1,0 +1,25 @@
+:root {
+    /* Main colors */
+    --fg-color: #202020;
+    --bg-color: #121212;
+    
+    --title-color: #fff;
+    --subtitle-color: #8b8b8b;
+
+    --element-color: #3e3e3e;
+    --element-active-color: #535353;
+    --element-inactive-color: #fff;
+    
+    --element-text-color: #818181;
+    --element-text-hover-color: #9f9f9f;
+    
+    /* Accounts Colors */
+    --account-inactive-color: #aaaaaa;
+    --account-inactive-hover-color: #c5c5c5;
+    
+    --account-active-color: #78d32d;
+    --account-active-hover-color: #8af334;
+    
+    --account-premium-color: #e4c317;
+    --account-premium-hover-color: #fad518;
+}

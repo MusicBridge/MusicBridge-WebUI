@@ -1,0 +1,32 @@
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.window {
+    background: #1c1c1c;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    min-width: 300px;
+    text-align: center;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+.window ul {
+    margin-top: 10px;
+}
+
+.window li {
+    margin-left: 10px;
+}
+
+.window * {
+    text-align: left;
+}

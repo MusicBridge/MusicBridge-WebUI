@@ -1,0 +1,256 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+.root {
+    min-width: 100%;
+    height: 100vh;
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 3.5fr 1fr;
+    grid-template-rows: 0.6fr 8fr 1fr;
+
+    background-color: var(--bg-color);
+}
+
+main {
+    grid-column: 1;
+    grid-row: 2;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 3;
+
+    border-radius: 10px;
+    margin: 0 10px 10px;
+
+    background-color: var(--fg-color);
+
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr 2fr 1fr;
+    grid-template-rows: 0.8fr 1fr;
+    grid-template-areas:
+                "current-track-logo-container playslider-container playslider-container playslider-container current-track-volume"
+                "current-track-logo-container . current-track-buttons . current-track-info";
+}
+
+.track-buttons {
+    margin: 10px 10px 10px auto;
+}
+
+.track-button {
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+    box-sizing: content-box;
+}
+
+.track-info {
+    margin-left: 15px;
+    margin-top: -20px;
+    display: flex;
+}
+
+.track-info img {
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
+    opacity: 0.7;
+}
+
+.button {
+    border-radius: 10px;
+    background-color: var(--element-color);
+}
+
+.button:hover {
+    background-color: var(--element-active-color);
+}
+
+.settings-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings {
+    display: flex;
+    width: 3vw;
+    height: 75%;
+    align-items: center;
+    justify-content: center;
+}
+
+.settings img {
+    width: 32px;
+    height: 32px;
+}
+
+.current-track-logo-container {
+    grid-area: current-track-logo-container;
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+}
+
+.current-track-logo {
+    border-radius: 10px;
+    width: 65px;
+    height: 65px;
+}
+
+.current-track-logo-container .text {
+    margin-left: 10px;
+    color: white;
+}
+
+.current-track-logo-container .text h1 {
+    margin-bottom: 4px;
+}
+
+.current-track-logo-container .text h3 {
+    color: var(--subtitle-color);
+}
+
+.current-track-buttons {
+    grid-area: current-track-buttons;
+}
+
+.current-track-volume {
+    grid-area: current-track-volume;
+}
+
+.playslider-container {
+    grid-area: playslider-container;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playslider-container p {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.playslider-container input {
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 80%;
+    accent-color: white;
+}
+
+.current-track-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.current-track-buttons img {
+    width: 38px;
+    height: 38px;
+}
+
+.current-track-buttons a {
+    width: 38px;
+    height: 38px;
+}
+
+.current-track-buttons img:hover {
+    opacity: 0.7;
+}
+
+.current-track-volume {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.current-track-volume img {
+    width: 38px;
+    height: 38px;
+}
+
+.current-track-volume input {
+    width: 80%;
+    accent-color: white;
+    margin: 10px;
+}
+
+.current-track-volume p {
+    color: white;
+    font-size: 1.25rem;
+    margin-right: 10px;
+}
+
+.current-track-info {
+    grid-area: current-track-info;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.current-track-info img {
+    margin-left: 20px;
+    width: 25px;
+    height: 25px;
+    opacity: 0.7;
+}
+
+.search-list {
+    flex: 1;
+    overflow-y: auto;
+}
+
+.search-list li {
+    margin: 10px;
+    border-radius: 10px;
+    height: 60px;
+    display: flex;
+}
+
+.search-track-data {
+    display: flex;
+}
+
+.search-track-data img {
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.search-track-data h1 {
+    color: white;
+}
+
+.search-track-data h3 {
+    color: var(--subtitle-color);
+}
+
+.search-track-info {
+    margin-left: auto;
+    align-items: center;
+    display: flex;
+    margin-right: 5px;
+}
+
+.search-track-info img {
+    margin-left: 5px;
+    width: 25px;
+    height: 25px;
+    opacity: 0.7;
+}
+
