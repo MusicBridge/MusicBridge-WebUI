@@ -3,12 +3,11 @@
 async function search(text) {
     clearSearchList();
 
-    const results = await fetchFromProvider(MBSearch + text, false);
-    
+    const results = (await fetchFromProvider(MBSearch + text, false))[0];
+    console.log(results)
     for (const result in results) {
-        const data = results[result][0];
-        const providerInfo = (await fetchFromProvider("", false, providers[result]))[0][0]
-        
+        const data = results[result];
+        const providerInfo = (await fetchFromProvider("", false, providers[result]))[0][result];
         for (let j = 0; j < data.length; j++) {
             const curr_data = data[j];
             addSearchTrack(providerInfo.color.r, providerInfo.color.g, providerInfo.color.b, providerInfo.provider_identifier,
